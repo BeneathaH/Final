@@ -2,12 +2,14 @@
 import './App.css'
 import ProductList from './components/ProductList/ProductList'
 
-function App() {
+
+
+const App = () => {
 
   return (
     <>
-      <h1> My Project</h1>
-      <finals/>
+      <h1> Store Product List</h1>
+      
       <ProductList/>
     </>
   )
