@@ -1,15 +1,5 @@
 import React from "react";
 
-
-// const Navbar = () => {
-//   return (
-//     <div>
-      
-//     </div>
-//   )
-// }
-
-// export default Navbar;
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
@@ -54,7 +44,7 @@ const Navbar = () => {
                  className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
                   to="/about">
                 {/* // className="nav-link" to="/about"> */}
-                
+
                   About
                 </NavLink>
               </li>

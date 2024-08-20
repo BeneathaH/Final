@@ -1,14 +1,25 @@
 
 import './App.css'
 import Navbar from './components/Navbar'
-import ProductList from './components/ProductList/ProductList'
+
 import { Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
 import ProductDetails from './components/ProductDetailed/productDetails'
+// import Navbar1 from './components/Navbar1'
+// import Footer from './components/Footer'
+// import Product1 from './components/Product1'
 
 
 
+// function App() {
+//   return <div className='App'>
+//   <Navbar1 />
+//   <Product1 />
+//   <Footer />
+//   </div>;
+  
 
+// }
 
 const App = () => {
 
@@ -16,11 +27,10 @@ const App = () => {
     <>
     
     <Navbar />
-      <h1> Latest Fashion</h1>
-      <Home />
+      <h1>Latest Fashions</h1>
       <Routes>
-        <Route exact path="/" element={<ProductList />} />
-        <Route exact path="/product-details/:id" element={<ProductDetails />} />
+        <Route  path="/" element={<Home />} />
+        <Route  path="/product-details/:id" element={<ProductDetails />} />
       </Routes>
       
       
@@ -29,4 +39,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
