@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import { getProducts } from "../../utils/api";
 import "./ProductList.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import Rating from "@mui/material/Rating";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 
 
 const ProductList = () => {
@@ -12,40 +9,37 @@ const ProductList = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState([]);
-  const navigate = useNavigate();
-  const navigateToDetails = (id) => {
-    navigate(`/product-details/${id}`);
-  }
+  // const navigate = useNavigate();
+  // const navigateToDetails = (id) => {
+  //   navigate
+  // }
  
   useEffect(() => {
-    // let isMounted = true;
-    // const fetchProducts = async () => {
-      
-      // try {
-      //   const res = await getProducts();
+    let isMounted = true;
+    const fetchProducts = async () => {
+      try {
+        const res = await getProducts();
 
-      //   if (isMounted) {
-      //     setData(products);
-      //     setFilter(products);
-      //     setLoading(false);
-      //    }
-      //   }catch (error) {
-      //     console.error("Fetching products failed", error);
-      //     setLoading(false);
-      //   }
-      // };
+        if (isMounted) {
+          setData(res.data);
+          setFilter(res.data);
+          setLoading(false);
+         }
+        }catch (error) {
+          console.error("Fetching products failed", error);
+          setLoading(false);
+        }
+      };
     
-    getProducts().then((res) => {
-      console.log(res);
-      setProducts(res.data);
-    })
+    // getProducts().then((res) => {
+    //   console.log(res);
+    //   setProducts(res.data);
 
+        fetchProducts();
 
-        
-
-      //  return () => {
-      //   isMounted = false;
-      //  };
+       return () => {
+        isMounted = false;
+       };
       
     }, []);
   
@@ -57,9 +51,9 @@ const ProductList = () => {
     } 
   };
 
-  const Loading = () => <>Loading....</>
+  const Loading = () => <p>Loading....</p>
 
- const ShowProducts = () => (
+const ShowProducts = () => (
     
       <>
         <div className="buttons d-flex justify-content-center mb-5 pb-5">
@@ -91,47 +85,34 @@ const ProductList = () => {
         </>
         );
       
-//      return (
-
-//        <div className="container my-5 py-5">
-//         <div className="row">
-//           <div className="col-12 mb-5">
-//             <h1 className="display-6 fw-bolder text-center">Latest Products</h1>
-//             <hr />
-//           </div>
-//         </div>
-//         <div className="row justify-content-center"></div>
-//         {loading ? <Loading /> : <ShowProducts />}
-//       </div>
-    
-//   );
-// };
-  return (
-    <>
-      <div className="container">
-        <div className="products-container">
-          {products.map((item) => (
-            <div onClick={() => navigateToDetails(item.id)} className="products" key={item.id}>
-              <h1>{item.title}</h1>
-              <img src={item.image} alt={item.title} />
-              <h3>$ {item.price}</h3>
-              <div className="rating-container">
-              <Box sx={{ "& > legend": { mt: 2 } }}>
-                <Typography component="legend">Product Rating</Typography>
-                <Rating
-                  name="read-only"
-                  value={item.rating.rate}
-                  size="small"
-                  readOnly
-                />
-              </Box>
-            </div>
-            </div>
-          ))}
+     return (
+       <div className="container my-5 py-5">
+        <div className="row">
+          <div className="col-12 mb-5">
+            <h1 className="display-6 fw-bolder text-center">Latest Products</h1>
+            <hr />
+          </div>
         </div>
+        <div className="row justify-content-center"></div>
+        {loading ? <Loading /> : <ShowProducts />}
       </div>
-    </>
+    
   );
 };
+//   return (
+//     <>
+//       <div className="container">
+//         <div className="products-container">
+//           {products.map((item) => (
+//             <div className="products" key={item.id}>
+//               <h1>{item.title}</h1>
+//               <img src={item.image} alt={item.title} />
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
 
 export default ProductList;

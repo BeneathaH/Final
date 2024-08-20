@@ -2,12 +2,15 @@ import React from "react";
 import Navbar from "./Navbar";
 import ProductList from "./ProductList/ProductList";
 import { useEffect, useState } from "react";
+import { getProducts } from "../utils/api";
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
-    const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+//   const [data, setData] = useState([]);
   const [filter, setFilter] = useState([]);
+  
     useEffect(() => {
         let isMounted = true;
         const fetchProducts = async () => {
@@ -26,12 +29,12 @@ const Home = () => {
             }
           };
         
-        // getProducts().then((res) => {
-        //   console.log(res);
-        //   setProducts(res.data);
-        // })
+        getProducts().then((res) => {
+          console.log(res);
+          setProducts(res.data);
+        })
     
-    
+        // fetchProducts();
             
     
            return () => {
