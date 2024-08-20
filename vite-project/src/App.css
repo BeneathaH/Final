@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -69,4 +69,17 @@ img {
 .rating-container {
   display: flex;
   justify-content: center;
+} */
+.navbar-nav a{
+  font-size: 18px;
 }
+.navbar-nav {
+  position:relative;
+  display: flex;
+}
+.navbar-nav a:hover{
+  cursor: pointer;
+}
+
+
+

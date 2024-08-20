@@ -1,35 +1,66 @@
 import React, { useEffect, useState } from 'react'
 import { getDetails } from '../../utils/api';
 import "./ProductDetails.css";
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
-const productDetails = () => {
-    const [products, setProducts] = useState([]);
-
+const ProductDetails = () => {
+    const [product, setProduct] = useState(null);
+    const {id} = useParams();
+    const navigate = useNavigate();
+    const navigateBack = () => {
+        navigate("/")
+    }
     useEffect(() => {
-        getDetails().then((res) => {
-          console.log(res.data);
-     
-        console.log(res);
+        getDetails(id).then((res) => {
+          setProduct(res)
+      console.log(res);
           
         });
-    }, []);
-  return (
-    <div>
-      {products.map((item) => {
-        return (
-          <div className="container" key={item.id}>
-            <h1>{item.title}</h1>
-            <p>{item.description}</p>
-            <p>{item.price}</p>
-            <p>{item.category}</p>
-            <p>{item.rating.rate}</p>
-          </div>
-        );
-      })}
-    </div>
-  )
-}
+    }, [id]);
 
-export default productDetails;
+    if(!product) return (
+        <div>Loading...</div>
+    )
+    return (
+        <>
+          <button className="back-button" onClick={() => navigate("/")}>Back</button>
+        <div className="container">
+          <div className="container-details">
+            <h1 className="product-title">{product.title}</h1>
+            <img src={product.image} alt={product.title} className="product-image" />
+            <p className="product-description">{product.description}</p>
+            <p className="product-price">${product.price}</p>
+            <p className="product-category">{product.category}</p>
+            {/* <p className="product-rating">Rating: {product.rating.rate}</p> */}
+            <button className="add-to-cart-button">Add to Cart</button>
+          </div>
+          </div>
+        </>
+
+      );
+    };
+//   return(
+//     <>
+//     <button onClick={()=> navigate("/")}>Back</button>
+//     <div>
+      
+        
+//           <div className="container-details" key={product.id}>
+//             <h1>{product.title}</h1>
+//             <img src={product.image} alt={product.title} />
+//             <p>{product.description}</p>
+//             <p>{product.price}</p>
+//             <p>{product.category}</p>
+//             {/* <p>{product.rating.rate}</p> */}
+//           </div>
+//           <button>Add to Cart</button>
+        
+      
+//     </div>
+//     </>
+//   )
+
+
+export default ProductDetails;
